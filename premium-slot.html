@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=500,user-scalable=no">
+  <title>Premium Gem Slot Machine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>💎 Premium Gem Slot Machine 💎</h1>
+    <!-- Reward Message Area -->
+    <div id="reward-message"></div>
+    <section id="slot-container">
+      <canvas id="slot-canvas" width="500" height="300"></canvas>
+    </section>
+    <section id="control-panel">
+      <button id="spin-btn">SPIN</button>
+      <span id="balance">Credits: 500</span>
+      <span id="last-win">Last Win: 0 credits</span>
+    </section>
+    <!-- Daily Bonus Panel -->
+    <section id="daily-bonus-panel">
+      <div>
+        <span id="bonus-timer-label">Next daily credit in:</span>
+        <span id="bonus-timer">--:--:--</span>
+      </div>
+      <div>
+        <span id="streak-label">Login streak:</span>
+        <span id="streak-counter">0 days</span>
+      </div>
+      <button id="claim-bonus-btn" style="display:none">Claim 100 credits</button>
+    </section>
+    <section id="paytable">
+      <h2>Paytable</h2>
+      <ul>
+        <li><span class="symbol ruby"></span> Ruby – 50× bet</li>
+        <li><span class="symbol emerald"></span> Emerald – 25× bet</li>
+        <li><span class="symbol sapphire"></span> Sapphire – 10× bet</li>
+        <li><span class="symbol amethyst"></span> Amethyst – 5× bet</li>
+        <li><span class="symbol coin"></span> Coin – 2× bet</li>
+      </ul>
+    </section>
+    <div id="coin-shower"></div>
+  </main>
+  <script type="module" src="game-ui.js"></script>
+</body>
+</html>
