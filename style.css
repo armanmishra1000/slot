@@ -1,6 +1,6 @@
 body {
-  background: linear-gradient(120deg, #141415 60%, #1a1814 100%);
-  color: #ffe68a;
+  background: #120f17;
+  color: #FDE047;
   font-family: 'Montserrat', Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
@@ -11,15 +11,17 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 30px 0;
-  gap: 30px;
+  padding: 48px 0 40px 0;
+  gap: 46px;
+  background: #120f17;
 }
 
 .game-container {
-  background: #19191b;
-  border-radius: 22px;
-  box-shadow: 0 8px 44px #000a;
-  padding: 28px 26px 28px 26px;
+  background: #16131b;
+  border-radius: 20px;
+  border: 3.2px solid #FFD700;
+  box-shadow: 0 4px 34px #000c;
+  padding: 38px 36px 38px 36px;
   flex-shrink: 0;
   width: 540px;
   display: flex;
@@ -35,128 +37,180 @@ main {
 }
 
 h1 {
-  font-size: 2rem;
-  color: #ffe68a;
-  font-weight: 900;
-  text-shadow: 0 4px 14px #0005;
-  margin: 0 0 16px 0;
+  font-size: 2.25rem;
+  color: #FDE047;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 22px 0;
+  text-shadow: 0 0 12px #ffe45c44, 0 2px 10px #fff4c515;
 }
 
 .slot-canvas-container {
-  background: #19191b;
-  border: 2.5px solid #ffe45c;
-  border-radius: 16px;
-  margin-bottom: 18px;
+  background: #18161c;
+  border: 3px solid #FFD700;
+  border-radius: 17px;
+  margin-bottom: 24px;
   position: relative;
-  box-shadow: 0 0 32px #0005;
+  box-shadow: 0 0 32px #0007;
 }
 #slot-canvas {
   display: block;
-  background: linear-gradient(to bottom, #232228 65%, #ffe45c11 100%);
-  border-radius: 13px;
-  margin: 0;
+  background: linear-gradient(to bottom, #232228 65%, #ffe45c10 100%);
+  border-radius: 12px;
 }
+
 #reward-message {
   position: absolute;
   left: 0;
   right: 0;
-  top: 35%;
+  top: 34%;
   width: 100%;
   text-align: center;
   z-index: 4;
 }
 
+/* --- Control Panel --- */
 .control-panel {
-  margin: 18px 0 8px 0;
+  margin: 24px 0 14px 0;
   display: flex;
-  gap: 13px;
+  flex-direction: column;
+  gap: 11px;
+  align-items: stretch;
+  width: 100%;
+}
+.main-controls {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  flex-wrap: wrap;
-}
-
-#bet-label {
-  color: #ffe45c;
+  gap: 20px;
+  width: 100%;
+  justify-content: flex-start;
   font-weight: 700;
-  font-size: 1.03rem;
 }
-
-#bet-amount-input {
-  width: 62px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  border: 1.5px solid #ffe45c99;
-  background: #232228;
-  color: #ffe68a;
+#bet-label {
+  color: #FFD700;
   font-size: 1.09rem;
+  margin-right: 2px;
+  font-weight: 700;
+}
+#bet-amount-input {
+  width: 64px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  border: 2px solid #FFD700;
+  background: #18161c;
+  color: #FFD700;
+  font-size: 1.10rem;
   font-family: inherit;
   font-weight: 700;
   outline: none;
   text-align: right;
-  margin-right: 4px;
-  transition: border .12s;
+  margin-right: 2px;
+  box-shadow: none;
+  transition: border .13s, background .16s;
 }
-
 #bet-amount-input:focus {
-  border: 2px solid #ffe45c;
-  background: #24242a;
+  border: 2.5px solid #ffe45c;
+  background: #23222c;
 }
 
-.control-panel button {
-  background: linear-gradient(90deg, #ffe45c, #bfa426 80%);
+#spin-btn {
+  background: #FFD700;
   color: #19191b;
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
   font-weight: 800;
-  font-size: 1.15rem;
-  padding: 7px 28px;
+  font-size: 1.17rem;
+  padding: 8px 34px;
   cursor: pointer;
-  box-shadow: 0 3px 14px #0004;
-  transition: background .14s;
+  margin-right: 7px;
+  box-shadow: 0 2px 6px #FFD70025, 0 1px 2px #ffe45c09;
+  transition: background .14s, box-shadow .12s;
 }
-.control-panel button:active {
-  background: linear-gradient(90deg, #bfa426 10%, #ffe45c 100%);
+#spin-btn:hover, #spin-btn:focus {
+  background: #ffe45c;
+  box-shadow: 0 4px 12px #FFD70030, 0 1px 2px #ffe45c13;
+}
+#spin-btn:active {
+  background: #e1b900;
 }
 
+#balance {
+  color: #FFD700;
+  font-size: 1.10rem;
+  font-weight: 700;
+}
+#balance-amount {
+  font-weight: 900;
+  margin-left: 2px;
+  letter-spacing: 0.5px;
+}
+
+.sub-controls {
+  margin-top: 0px;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #FFD700;
+  letter-spacing: .01em;
+}
+#last-win {
+  color: #FFD700;
+}
+#last-win-amount {
+  font-weight: 800;
+  margin-left: 1.5px;
+}
+
+/* --- Daily Bonus Panel --- */
 .daily-bonus-panel {
-  background: #262626;
-  border-radius: 10px;
-  padding: 8px 16px;
-  margin-bottom: 18px;
+  background: #18161c;
+  border-radius: 12px;
+  border: 1.6px solid #FFD700;
+  padding: 11px 21px;
+  margin-bottom: 24px;
   font-size: 1rem;
   box-shadow: 0 2px 10px #0007;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3px;
+  gap: 4px;
 }
 .daily-bonus-panel button {
-  margin-top: 6px;
-  background: #ffe45c;
-  color: #212;
+  margin-top: 7px;
+  background: #FFD700;
+  color: #23221a;
   border: none;
   border-radius: 6px;
   font-weight: 800;
-  font-size: 1rem;
-  padding: 4px 16px;
+  font-size: 1.01rem;
+  padding: 4px 18px;
   cursor: pointer;
-  box-shadow: 0 2px 8px #0002;
+  box-shadow: 0 2px 8px #FFD70025, 0 1px 2px #ffe45c09;
+  transition: background .13s;
 }
+.daily-bonus-panel button:active {
+  background: #e1b900;
+}
+#bonus-timer {
+  color: #ffd700;
+  font-weight: 700;
+}
+
+/* --- Paytable --- */
 #paytable {
-  background: #232228;
+  background: #18161c;
   border-radius: 12px;
-  padding: 12px 20px;
+  border: 1.6px solid #FFD700;
+  padding: 13px 21px;
   margin: 12px 0 0 0;
   width: 100%;
-  box-shadow: 0 2px 14px #0005;
+  box-shadow: 0 2px 14px #0007;
 }
 #paytable h2 {
-  color: #ffe68a;
-  margin: 0 0 7px 0;
-  font-size: 1.11rem;
+  color: #FFD700;
+  margin: 0 0 9px 0;
+  font-size: 1.13rem;
   font-weight: 800;
-  letter-spacing: .1em;
+  letter-spacing: .08em;
 }
 #paytable ul {
   padding: 0;
@@ -164,25 +218,32 @@ h1 {
   list-style: none;
 }
 #paytable li {
-  font-size: 1rem;
-  margin: 3px 0;
+  font-size: 1.02rem;
+  margin: 7px 0 5px 0;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
+  color: #FFD700;
+}
+#paytable li b {
+  font-weight: 900;
+  color: #FFD700;
 }
 .symbol {
   display: inline-block;
   width: 19px;
   height: 19px;
-  margin-right: 3px;
+  margin-right: 4px;
   border-radius: 3px;
   vertical-align: middle;
+  box-shadow: 0 1px 3px #ffe45c22, 0 1.5px 2.5px #ffe45c13 inset;
 }
-.ruby    { background: #ff225a; border: 2px solid #fce; }
-.emerald { background: #22df71; border: 2px solid #e7ffe1; }
-.sapphire{ background: #229aff; border: 2px solid #daf1ff; }
-.coin    { background: #ffe45c; border: 2px solid #fff6ba; }
-.amethyst{ background: #af4ee7; border: 2px solid #e6c7fd; }
+.ruby    { background: #ff225a; border: 2.2px solid #FFD700; }
+.emerald { background: #22df71; border: 2.2px solid #FFD700; }
+.sapphire{ background: #229aff; border: 2.2px solid #FFD700; border-radius: 50%; }
+.coin    { background: #ffe45c; border: 2.2px solid #FFD700; border-radius: 50%; }
+.amethyst{ background: #af4ee7; border: 2.2px solid #FFD700; transform: rotate(45deg);}
+.amethyst-text { color: #af4ee7; font-weight: 700; margin-left: 2px; }
 
 #coin-shower {
   pointer-events: none;
@@ -198,67 +259,101 @@ h1 {
   opacity: 0.85;
 }
 @keyframes fall {
-  0%   { opacity: 1; transform: translateY(-30px) rotate(-20deg);}
+  0%   { opacity: 1; transform: translateY(-36px) rotate(-22deg) scale(1.09);}
   90%  { opacity: 1;}
-  100% { opacity: 0; transform: translateY(120px) rotate(20deg);}
+  100% { opacity: 0; transform: translateY(125px) rotate(16deg) scale(0.96);}
 }
 
-/* HISTORY PANEL */
+/* --- History Panel --- */
 #history-panel {
-  width: 265px;
-  margin-left: 16px;
-  background: #1c1c1e;
-  padding: 16px 10px 16px 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px #0008;
-  max-height: 86vh;
+  width: 305px;
+  margin-left: 36px;
+  background: #16131b;
+  padding: 26px 16px 28px 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 28px #000c;
+  max-height: 88vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
+  border: 3.2px solid #FFD700;
 }
 #history-panel h2 {
-  font-size: 1.08rem;
-  color: #ffe45c;
-  margin: 0 0 7px 0;
-  letter-spacing: .05em;
+  font-size: 1.14rem;
+  color: #FFD700;
+  margin: 0 0 14px 0;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-shadow: 0 1px 8px #ffe45c29;
 }
 #spin-history-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 360px;
+  max-height: 430px;
   overflow-y: auto;
 }
 #spin-history-list li {
-  background: #24242a;
-  border-radius: 7px;
-  margin-bottom: 7px;
-  padding: 6px 7px;
-  color: #ffe68a;
-  font-size: .98rem;
+  background: #18161c;
+  border-radius: 10px;
+  margin-bottom: 13px;
+  padding: 11px 14px 10px 16px;
+  color: #FFD700;
+  font-size: 1.02rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  box-shadow: 0 1px 6px #0003;
-  border-left: 3px solid #ffe45c44;
+  gap: 4px;
+  box-shadow: 0 1.5px 8px #FFD70019, 0 0.5px 2px #FFD70009 inset;
+  border-left: 7px solid #FFD700;
+  transition: box-shadow .12s;
+}
+#spin-history-list li:hover {
+  box-shadow: 0 3px 18px #FFD70026, 0 0.5px 2px #FFD70018 inset, 0 0 0 1.5px #ffd45c22;
 }
 
 .symbol-hist-icon {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 21px;
+  height: 21px;
   margin-right: 2px;
   vertical-align: middle;
-  border-radius: 3px;
-  font-size: 11px;
+  border-radius: 4px;
+  font-size: 12px;
   font-weight: 900;
   text-align: center;
-  line-height: 16px;
+  line-height: 21px;
   color: #fff;
+  margin-bottom: 1.5px;
+  box-shadow: 0 1px 3px #ffe45c18, 0 1.5px 2.5px #ffe45c10 inset;
+  border: none;
+  position: relative;
 }
-.ruby-hist-icon     { background: #ff225a; border: 1px solid #fce; }
-.emerald-hist-icon  { background: #22df71; border: 1px solid #e7ffe1; }
-.sapphire-hist-icon { background: #229aff; border: 1px solid #daf1ff; }
-.coin-hist-icon     { background: #ffe45c; border: 1px solid #fff6ba; color: #a7890a; }
-.amethyst-hist-icon { background: #af4ee7; border: 1px solid #e6c7fd; }
+.ruby-hist-icon     { background: #ff225a; }
+.emerald-hist-icon  { background: #22df71; }
+.sapphire-hist-icon { background: #229aff; border-radius: 50%; }
+.coin-hist-icon     { background: #ffe45c; color: #a7890a; border-radius: 50%; }
+.amethyst-hist-icon { background: #af4ee7; transform: rotate(45deg);}
+.symbol-hist-icon:after {
+  content: '';
+  display: none;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #120f17;
+}
+::-webkit-scrollbar-thumb {
+  background: #18161c;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFD70044;
+}
+
+/* General Transitions & Polish */
+*, *:before, *:after {
+  box-sizing: border-box;
+  transition: background 0.17s, color 0.14s, box-shadow 0.16s, border 0.14s;
+}

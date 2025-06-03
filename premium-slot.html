@@ -15,11 +15,15 @@
           <div id="reward-message"></div>
         </div>
         <div class="control-panel">
-          <label for="bet-amount-input" id="bet-label">Bet:</label>
-          <input type="number" id="bet-amount-input" min="1" step="1">
-          <button id="spin-btn">SPIN</button>
-          <span id="balance">Credits: 1000</span>
-          <span id="last-win">Last Win: 0 credits</span>
+          <div class="main-controls">
+            <label for="bet-amount-input" id="bet-label">Bet:</label>
+            <input type="number" id="bet-amount-input" min="1" step="1">
+            <button id="spin-btn">SPIN</button>
+            <span id="balance">Credits: <span id="balance-amount">1000</span></span>
+          </div>
+          <div class="sub-controls">
+            <span id="last-win">Last Win: <span id="last-win-amount">0</span> credits</span>
+          </div>
         </div>
         <div class="daily-bonus-panel">
           <span>Next daily credit in: <span id="bonus-timer"></span></span>
@@ -33,7 +37,7 @@
             <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
             <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
             <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
-            <li><span class="symbol amethyst"></span> Amethyst – No reward</li>
+            <li><span class="symbol amethyst"></span> Amethyst – <span class="amethyst-text">No reward</span></li>
           </ul>
         </section>
         <div id="coin-shower"></div>
