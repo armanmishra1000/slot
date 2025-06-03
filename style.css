@@ -1,265 +1,240 @@
 body {
-    background: linear-gradient(135deg, #161617 70%, #bfa046 100%);
-    color: #ffd700;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-  }
-  
-  main {
-    width: 540px;
-    margin: 24px auto;
-    background: #222225;
-    border-radius: 16px;
-    box-shadow: 0 8px 40px #000b, 0 1px 1px #bfa046cc;
-    padding: 32px 20px 20px 20px;
-    position: relative;
-  }
-  
-  h1 {
-    color: #ffef9a;
-    text-align: center;
-    margin-bottom: 12px;
-    font-size: 2rem;
-    letter-spacing: 2px;
-  }
-  
-  /* --- REWARD MESSAGE --- */
-  #reward-message {
-    position: absolute;
-    top: -30px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 100;
-    pointer-events: none;
-  }
-  
-  .reward-animate {
-    opacity: 0;
-    transform: translateY(-30px) scale(0.98);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  
-  .reward-visible {
-    opacity: 1 !important;
-    transform: translateY(0) scale(1.05);
-    pointer-events: all;
-  }
-  
-  .reward-msg {
-    display: inline-block;
-    background: linear-gradient(90deg, #ffd700 10%, #ffefa5 40%, #bfa046 90%);
-    color: #543b00;
-    font-size: 1.25rem;
-    font-weight: bold;
-    border-radius: 16px;
-    padding: 16px 38px;
-    box-shadow: 0 8px 32px #bfa04655;
-    margin: 0 auto;
-    animation: reward-pop 0.4s cubic-bezier(.4,2,.6,.9);
-    border: 3px solid #fffbe0cc;
-    letter-spacing: 1px;
-  }
-  
-  @keyframes reward-pop {
-    0%   { transform: scale(0.8); opacity: 0; }
-    60%  { transform: scale(1.08); opacity: 1; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  
-  /* --- DAILY BONUS PANEL --- */
-  #daily-bonus-panel {
-    background: linear-gradient(90deg, #24221c 65%, #bfa04622 100%);
-    border: 2px solid #bfa04666;
-    border-radius: 12px;
-    color: #ffe999;
-    padding: 10px 18px 7px 18px;
-    margin: 16px 0 12px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.05rem;
-    box-shadow: 0 3px 18px #bfa04611;
-  }
-  
-  #daily-bonus-panel > div {
-    margin-bottom: 2px;
-  }
-  
-  #bonus-timer-label {
-    color: #ffef9a;
-    font-weight: 500;
-  }
-  
-  #bonus-timer {
-    font-size: 1.14em;
-    font-family: monospace;
-    padding: 0 6px;
-    color: #ffd700;
-    letter-spacing: 1px;
-  }
-  
-  #streak-label {
-    color: #ffc66a;
-  }
-  
-  #streak-counter {
-    font-weight: bold;
-    margin-left: 6px;
-    font-size: 1.08em;
-    color: #ffe685;
-    animation: streak-pop 0.6s cubic-bezier(.3,1.8,.7,.85) both;
-  }
-  
-  @keyframes streak-pop {
-    0% { transform: scale(0.8);}
-    50% { transform: scale(1.2);}
-    100% { transform: scale(1);}
-  }
-  
-  #claim-bonus-btn {
-    margin-top: 5px;
-    font-size: 1rem;
-    background: linear-gradient(90deg,#ffed9a 40%,#bfa046 100%);
-    border: none;
-    border-radius: 8px;
-    color: #232326;
-    font-weight: 600;
-    padding: 6px 22px;
-    cursor: pointer;
-    transition: box-shadow 0.18s;
-    box-shadow: 0 2px 12px #bfa04644;
-    outline: none;
-  }
-  
-  /* --- REMAINDER (SAME AS BEFORE) --- */
-  #slot-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  
-  #slot-canvas {
-    background: linear-gradient(#232326 70%, #bfa046 100%);
-    border: 4px solid #bfa046;
-    border-radius: 14px;
-    box-shadow: 0 4px 24px #222b;
-    display: block;
-  }
-  
-  #control-panel {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 1.15rem;
-  }
-  
-  #spin-btn {
-    font-size: 1.15rem;
-    background: linear-gradient(90deg,#ffed9a 40%,#bfa046 100%);
-    border: none;
-    border-radius: 8px;
-    color: #232326;
-    font-weight: 600;
-    padding: 10px 32px;
-    cursor: pointer;
-    transition: box-shadow 0.18s;
-    box-shadow: 0 2px 16px #bfa04666;
-    outline: none;
-  }
-  
-  #spin-btn:active {
-    box-shadow: 0 0 8px #ffd700,0 2px 16px #bfa04633;
-  }
-  
-  #balance, #last-win {
-    background: #18181aee;
-    padding: 3px 12px;
-    border-radius: 6px;
-    min-width: 120px;
-    text-align: center;
-    color: #ffed9a;
-    margin: 0 6px;
-  }
-  
-  #paytable {
-    background: #18181a;
-    border-radius: 12px;
-    padding: 16px 24px;
-    margin-top: 16px;
-    box-shadow: 0 1px 8px #bfa04633;
-  }
-  
-  #paytable h2 {
-    color: #ffed9a;
-    margin-top: 0;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    text-align: left;
-  }
-  
-  #paytable ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  #paytable li {
-    display: flex;
-    align-items: center;
-    font-size: 1.05rem;
-    margin-bottom: 5px;
-  }
-  
-  .symbol {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-    vertical-align: middle;
-    border-radius: 50%;
-    border: 2px solid #ffd70099;
-  }
-  
-  .symbol.ruby { background: radial-gradient(#f44 60%, #a02 100%); }
-  .symbol.emerald { background: radial-gradient(#1f8c38 60%, #0c3116 100%); }
-  .symbol.sapphire { background: radial-gradient(#25a1ef 60%, #2236a6 100%); }
-  .symbol.amethyst { background: radial-gradient(#a139b1 60%, #4d1859 100%); }
-  .symbol.coin { background: radial-gradient(#ffe45c 70%, #c7ad23 100%); border: 2px solid #ffd700cc; }
-  
-  #coin-shower {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100vw;
-    height: 0;
-    pointer-events: none;
-    z-index: 9999;
-  }
-  
-  /* Coin Shower Animation */
-  .coin-fx {
-    position: fixed;
-    font-size: 32px;
-    animation: coin-fall 1.5s linear forwards;
-    z-index: 2000;
-    pointer-events: none;
-  }
-  
-  @keyframes coin-fall {
-    0% {
-      transform: translateY(-40px) scale(1) rotate(-10deg);
-      opacity: 1;
-    }
-    60% {
-      opacity: 1;
-      transform: translateY(220px) scale(1.1) rotate(20deg);
-    }
-    100% {
-      transform: translateY(420px) scale(1) rotate(35deg);
-      opacity: 0;
-    }
-  }
+  background: linear-gradient(120deg, #141415 60%, #1a1814 100%);
+  color: #ffe68a;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.main-flex-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 30px 0;
+  gap: 30px;
+}
+
+.game-container {
+  background: #19191b;
+  border-radius: 22px;
+  box-shadow: 0 8px 44px #000a;
+  padding: 28px 26px 28px 26px;
+  flex-shrink: 0;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #ffe68a;
+  font-weight: 900;
+  text-shadow: 0 4px 14px #0005;
+  margin: 0 0 16px 0;
+}
+
+.slot-canvas-container {
+  background: #19191b;
+  border: 2.5px solid #ffe45c;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  position: relative;
+  box-shadow: 0 0 32px #0005;
+}
+#slot-canvas {
+  display: block;
+  background: linear-gradient(to bottom, #232228 65%, #ffe45c11 100%);
+  border-radius: 13px;
+  margin: 0;
+}
+#reward-message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35%;
+  width: 100%;
+  text-align: center;
+  z-index: 4;
+}
+
+.control-panel {
+  margin: 18px 0 8px 0;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.control-panel button {
+  background: linear-gradient(90deg, #ffe45c, #bfa426 80%);
+  color: #19191b;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  padding: 7px 28px;
+  cursor: pointer;
+  box-shadow: 0 3px 14px #0004;
+  transition: background .14s;
+}
+.control-panel button:active {
+  background: linear-gradient(90deg, #bfa426 10%, #ffe45c 100%);
+}
+
+.daily-bonus-panel {
+  background: #262626;
+  border-radius: 10px;
+  padding: 8px 16px;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  box-shadow: 0 2px 10px #0007;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+.daily-bonus-panel button {
+  margin-top: 6px;
+  background: #ffe45c;
+  color: #212;
+  border: none;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 4px 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #0002;
+}
+#paytable {
+  background: #232228;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin: 12px 0 0 0;
+  width: 100%;
+  box-shadow: 0 2px 14px #0005;
+}
+#paytable h2 {
+  color: #ffe68a;
+  margin: 0 0 7px 0;
+  font-size: 1.11rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+#paytable ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#paytable li {
+  font-size: 1rem;
+  margin: 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.symbol {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin-right: 3px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+.ruby    { background: #ff225a; border: 2px solid #fce; }
+.emerald { background: #22df71; border: 2px solid #e7ffe1; }
+.sapphire{ background: #229aff; border: 2px solid #daf1ff; }
+.coin    { background: #ffe45c; border: 2px solid #fff6ba; }
+.amethyst{ background: #af4ee7; border: 2px solid #e6c7fd; }
+
+#coin-shower {
+  pointer-events: none;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: 99;
+}
+.coin-fx {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: fall 1.7s cubic-bezier(.5,1.2,.4,1) forwards;
+  opacity: 0.85;
+}
+@keyframes fall {
+  0%   { opacity: 1; transform: translateY(-30px) rotate(-20deg);}
+  90%  { opacity: 1;}
+  100% { opacity: 0; transform: translateY(120px) rotate(20deg);}
+}
+
+/* HISTORY PANEL */
+#history-panel {
+  width: 265px;
+  margin-left: 16px;
+  background: #1c1c1e;
+  padding: 16px 10px 16px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px #0008;
+  max-height: 86vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#history-panel h2 {
+  font-size: 1.08rem;
+  color: #ffe45c;
+  margin: 0 0 7px 0;
+  letter-spacing: .05em;
+}
+#spin-history-list, #winning-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+#spin-history-list li, #winning-history-list li {
+  background: #24242a;
+  border-radius: 7px;
+  margin-bottom: 7px;
+  padding: 6px 7px;
+  color: #ffe68a;
+  font-size: .98rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  box-shadow: 0 1px 6px #0003;
+  border-left: 3px solid #ffe45c44;
+}
+
+.symbol-hist-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+  vertical-align: middle;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 16px;
+  color: #fff;
+}
+.ruby-hist-icon     { background: #ff225a; border: 1px solid #fce; }
+.emerald-hist-icon  { background: #22df71; border: 1px solid #e7ffe1; }
+.sapphire-hist-icon { background: #229aff; border: 1px solid #daf1ff; }
+.coin-hist-icon     { background: #ffe45c; border: 1px solid #fff6ba; color: #a7890a; }
+.amethyst-hist-icon { background: #af4ee7; border: 1px solid #e6c7fd; }
+#winning-history-list li span.win-time {
+  font-size: .82em;
+  color: #b9b97d;
+  margin-left: 10px;
+}

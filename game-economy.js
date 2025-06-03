@@ -10,10 +10,12 @@ export function loadState() {
             if (typeof parsed.credits !== "number" || parsed.credits < 0) parsed.credits = 500;
             if (!parsed.lastBonus) parsed.lastBonus = 0;
             if (!parsed.streak) parsed.streak = 0;
+            parsed.spinHistory = parsed.spinHistory || [];
+            parsed.winningHistory = parsed.winningHistory || [];
             return parsed;
         }
     } catch {}
-    return { credits: 500, lastWin: 0, streak: 0, lastBonus: 0 };
+    return { credits: 500, lastWin: 0, streak: 0, lastBonus: 0, spinHistory: [], winningHistory: [] };
 }
 export function saveState(state) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -27,8 +29,6 @@ export function formatTimer(ms) {
     let s = Math.floor((ms%60000)/1000);
     return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 }
-
-// ---- New helper function ----
 export function getDiscountMessage(service, percent) {
     if (!service) return "";
     if (percent === 100) return `${service} FREE account unlocked!`;

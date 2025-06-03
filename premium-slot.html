@@ -2,47 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=500,user-scalable=no">
   <title>Premium Gem Slot Machine</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main>
-    <h1>💎 Premium Gem Slot Machine 💎</h1>
-    <!-- Reward Message Area -->
-    <div id="reward-message"></div>
-    <section id="slot-container">
-      <canvas id="slot-canvas" width="500" height="300"></canvas>
-    </section>
-    <section id="control-panel">
-      <button id="spin-btn">SPIN</button>
-      <span id="balance">Credits: 500</span>
-      <span id="last-win">Last Win: 0 credits</span>
-    </section>
-    <!-- Daily Bonus Panel -->
-    <section id="daily-bonus-panel">
-      <div>
-        <span id="bonus-timer-label">Next daily credit in:</span>
-        <span id="bonus-timer">--:--:--</span>
-      </div>
-      <div>
-        <span id="streak-label">Login streak:</span>
-        <span id="streak-counter">0 days</span>
-      </div>
-      <button id="claim-bonus-btn" style="display:none">Claim 100 credits</button>
-    </section>
-    <section id="paytable">
-        <h2>Paytable</h2>
-        <ul>
-          <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-          <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-          <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-          <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
-          <li><span class="symbol amethyst"></span> Amethyst – No reward</li>
-        </ul>
+  <div class="main-flex-wrapper">
+    <div class="game-container">
+      <main>
+        <h1>💎 Premium Gem Slot Machine 💎</h1>
+        <div class="slot-canvas-container">
+          <canvas id="slot-canvas" width="500" height="300"></canvas>
+          <div id="reward-message"></div>
+        </div>
+        <div class="control-panel">
+          <button id="spin-btn">SPIN</button>
+          <span id="balance">Credits: 1000</span>
+          <span id="last-win">Last Win: 0 credits</span>
+        </div>
+        <div class="daily-bonus-panel">
+          <span>Next daily credit in: <span id="bonus-timer"></span></span>
+          <span>Login streak: <span id="streak-counter"></span></span>
+          <button id="claim-bonus-btn" style="display:none;">Claim 100 Credits</button>
+        </div>
+        <section id="paytable">
+          <h2>Paytable</h2>
+          <ul>
+            <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+            <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+            <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+            <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
+            <li><span class="symbol amethyst"></span> Amethyst – No reward</li>
+          </ul>
+        </section>
+        <div id="coin-shower"></div>
+      </main>
+    </div>
+    <aside id="history-panel">
+      <section id="spin-history-section">
+        <h2>Spin History</h2>
+        <ul id="spin-history-list"></ul>
       </section>
-    <div id="coin-shower"></div>
-  </main>
+      <section id="winning-history-section">
+        <h2>Winning History</h2>
+        <ul id="winning-history-list"></ul>
+      </section>
+    </aside>
+  </div>
   <script type="module" src="game-ui.js"></script>
 </body>
 </html>
