@@ -1,7 +1,7 @@
 body {
-  background: #120f17;
+  background: linear-gradient(160deg, #16131b 0%, #120f17 100%);
   color: #FDE047;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
 }
@@ -17,10 +17,10 @@ body {
 }
 
 .game-container {
-  background: #16131b;
+  background: linear-gradient(to bottom, #1b1824, #16131b);
   border-radius: 20px;
   border: 3.2px solid #FFD700;
-  box-shadow: 0 4px 34px #000c;
+  box-shadow: 0 4px 34px #000c, 0 0 20px #ffd70020;
   padding: 38px 36px 38px 36px;
   flex-shrink: 0;
   width: 540px;
@@ -52,6 +52,10 @@ h1 {
   margin-bottom: 24px;
   position: relative;
   box-shadow: 0 0 32px #0007;
+}
+.slot-canvas-container.glow {
+  box-shadow: 0 0 42px #ffd70066, 0 0 20px #ffd70033 inset, 0 0 32px #0007;
+  transition: box-shadow 0.4s ease;
 }
 #slot-canvas {
   display: block;
@@ -124,14 +128,16 @@ h1 {
   cursor: pointer;
   margin-right: 7px;
   box-shadow: 0 2px 6px #FFD70025, 0 1px 2px #ffe45c09;
-  transition: background .14s, box-shadow .12s;
+  transition: background .14s, box-shadow .12s, transform .2s;
 }
 #spin-btn:hover, #spin-btn:focus {
   background: #ffe45c;
   box-shadow: 0 4px 12px #FFD70030, 0 1px 2px #ffe45c13;
+  transform: translateY(-2px);
 }
 #spin-btn:active {
   background: #e1b900;
+  transform: none;
 }
 
 #balance {
@@ -355,5 +361,5 @@ h1 {
 /* General Transitions & Polish */
 *, *:before, *:after {
   box-sizing: border-box;
-  transition: background 0.17s, color 0.14s, box-shadow 0.16s, border 0.14s;
+  transition: background 0.17s, color 0.14s, box-shadow 0.16s, border 0.14s, transform 0.2s;
 }

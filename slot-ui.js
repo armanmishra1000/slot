@@ -15,7 +15,16 @@ export let bonusTimer = null, canBonus = false;
 export function setupSlotUI() {
     // --- UI elements ---
     const canvas = document.getElementById("slot-canvas");
+    const canvasContainer = document.querySelector(".slot-canvas-container");
     const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const width = 500;
+    const height = 300;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    ctx.scale(dpr, dpr);
     const balanceEl = document.getElementById("balance");
     const lastWinEl = document.getElementById("last-win");
     const rewardMsgEl = document.getElementById("reward-message");
@@ -76,6 +85,8 @@ export function setupSlotUI() {
     }
 
     function onSpinEnd() {
+        canvasContainer.classList.add("glow");
+        setTimeout(() => canvasContainer.classList.remove("glow"), 600);
         setTimeout(() => {
             const finalReelSymbols = [];
             for (let row = 0; row < ROWS; row++) {
