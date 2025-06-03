@@ -30,6 +30,14 @@ export function updateSpinHistoryUI() {
         row1.appendChild(resSpan);
         li.appendChild(row1);
 
+        // Row 1.5: Bet amount for this spin
+        const betDiv = document.createElement('div');
+        betDiv.textContent = `Bet: ${entry.bet} credits`;
+        betDiv.style.fontSize = "0.97em";
+        betDiv.style.color = "#ffe68a";
+        betDiv.style.fontWeight = "600";
+        li.appendChild(betDiv);
+
         // Row 2: Win description if any
         if (entry.winText && entry.winText !== "No win") {
             const row2 = document.createElement('div');

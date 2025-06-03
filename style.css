@@ -69,11 +69,40 @@ h1 {
 .control-panel {
   margin: 18px 0 8px 0;
   display: flex;
-  gap: 14px;
+  gap: 13px;
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  flex-wrap: wrap;
 }
+
+#bet-label {
+  color: #ffe45c;
+  font-weight: 700;
+  font-size: 1.03rem;
+}
+
+#bet-amount-input {
+  width: 62px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 1.5px solid #ffe45c99;
+  background: #232228;
+  color: #ffe68a;
+  font-size: 1.09rem;
+  font-family: inherit;
+  font-weight: 700;
+  outline: none;
+  text-align: right;
+  margin-right: 4px;
+  transition: border .12s;
+}
+
+#bet-amount-input:focus {
+  border: 2px solid #ffe45c;
+  background: #24242a;
+}
+
 .control-panel button {
   background: linear-gradient(90deg, #ffe45c, #bfa426 80%);
   color: #19191b;
@@ -194,14 +223,14 @@ h1 {
   margin: 0 0 7px 0;
   letter-spacing: .05em;
 }
-#spin-history-list, #winning-history-list {
+#spin-history-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 200px;
+  max-height: 360px;
   overflow-y: auto;
 }
-#spin-history-list li, #winning-history-list li {
+#spin-history-list li {
   background: #24242a;
   border-radius: 7px;
   margin-bottom: 7px;
@@ -210,7 +239,7 @@ h1 {
   font-size: .98rem;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   box-shadow: 0 1px 6px #0003;
   border-left: 3px solid #ffe45c44;
 }
@@ -233,8 +262,3 @@ h1 {
 .sapphire-hist-icon { background: #229aff; border: 1px solid #daf1ff; }
 .coin-hist-icon     { background: #ffe45c; border: 1px solid #fff6ba; color: #a7890a; }
 .amethyst-hist-icon { background: #af4ee7; border: 1px solid #e6c7fd; }
-#winning-history-list li span.win-time {
-  font-size: .82em;
-  color: #b9b97d;
-  margin-left: 10px;
-}

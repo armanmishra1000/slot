@@ -4,12 +4,12 @@ import {
     setAnimating, getAnimating, setCoinsToShower, getCoinsToShower
 } from './game-core.js';
 import {
-    loadState, saveState, bet, BONUS_INTERVAL, canClaimBonus, formatTimer, getDiscountMessage
+    loadState, saveState, DEFAULT_BET, MIN_BET, BONUS_INTERVAL, canClaimBonus, formatTimer, getDiscountMessage
 } from './game-economy.js';
 import { addCombinedHistoryEntry, updateSpinHistoryUI, setHistoryState, getHistoryState } from './slot-history.js';
 
 export let state;
-export let balance, lastWin, streak, lastBonus;
+export let balance, lastWin, streak, lastBonus, currentBet;
 export let bonusTimer = null, canBonus = false;
 
 export function setupSlotUI() {
@@ -22,14 +22,28 @@ export function setupSlotUI() {
     const bonusTimerEl = document.getElementById("bonus-timer");
     const streakCounterEl = document.getElementById("streak-counter");
     const claimBonusBtn = document.getElementById("claim-bonus-btn");
+    const betAmountInputEl = document.getElementById("bet-amount-input");
 
     state = loadState();
     balance = state.credits;
     lastWin = state.lastWin;
     streak = state.streak;
     lastBonus = state.lastBonus;
-    // History: Provide references for slot-history.js
+    currentBet = state.currentBet;
     setHistoryState(state);
+
+    // Set up initial bet input value and validation
+    betAmountInputEl.value = currentBet;
+    betAmountInputEl.min = MIN_BET;
+
+    betAmountInputEl.addEventListener("change", function() {
+        let val = parseInt(betAmountInputEl.value, 10);
+        if (isNaN(val) || val < MIN_BET) val = MIN_BET;
+        if (val > balance) val = balance > 0 ? balance : MIN_BET;
+        currentBet = val;
+        betAmountInputEl.value = currentBet;
+        save();
+    });
 
     // INIT
     initReels(randSymbol);
@@ -42,12 +56,12 @@ export function setupSlotUI() {
     document.getElementById("spin-btn").addEventListener("click", spin);
 
     function spin() {
-        if (getAnimating() || balance < bet) return;
+        if (getAnimating() || balance < currentBet) return;
         setAnimating(true);
         clearWinLines(); clearWinningSymbols(); setCoinsToShower(0);
         lastWin = 0; updatePanels();
 
-        balance -= bet; updatePanels(); save();
+        balance -= currentBet; updatePanels(); save();
         const targets = [];
         for (let i = 0; i < REELS; i++) {
             const col = [];
@@ -63,7 +77,6 @@ export function setupSlotUI() {
 
     function onSpinEnd() {
         setTimeout(() => {
-            // Prepare symbols
             const finalReelSymbols = [];
             for (let row = 0; row < ROWS; row++) {
                 let rowArr = [];
@@ -74,13 +87,12 @@ export function setupSlotUI() {
             }
             setAnimating(false);
             const winResult = checkWins();
-            // Add history
             addCombinedHistoryEntry({
                 symbols: finalReelSymbols,
                 winText: winResult.winText,
                 creditsWon: winResult.creditsWon,
                 timestamp: new Date().toLocaleTimeString(),
-                bet: bet
+                bet: currentBet
             });
         }, 250);
     }
@@ -127,9 +139,9 @@ export function setupSlotUI() {
             }
             if (symbol.name === "Coin") {
                 let credits = 0;
-                if (count === 3) credits = bet * 1;
-                else if (count === 4) credits = bet * 3;
-                else if (count >= 5) credits = bet * 10;
+                if (count === 3) credits = currentBet * 1;
+                else if (count === 4) credits = currentBet * 3;
+                else if (count >= 5) credits = currentBet * 10;
                 coinWin += credits;
                 setCoinsToShower(getCoinsToShower() + (count >= 5 ? 6 : count >= 4 ? 3 : 1));
                 winLines.push(positions);
@@ -193,6 +205,11 @@ export function setupSlotUI() {
     function updatePanels() {
         balanceEl.textContent = `Credits: ${balance}`;
         lastWinEl.textContent = `Last Win: ${lastWin} credits`;
+        if (betAmountInputEl.value > balance) {
+            betAmountInputEl.value = balance > 0 ? balance : MIN_BET;
+            currentBet = parseInt(betAmountInputEl.value, 10);
+            save();
+        }
     }
     function save() {
         saveState({
@@ -200,6 +217,7 @@ export function setupSlotUI() {
             lastWin,
             streak,
             lastBonus,
+            currentBet: currentBet,
             combinedHistory: getHistoryState()
         });
     }

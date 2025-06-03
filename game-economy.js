@@ -1,5 +1,6 @@
 export const STORAGE_KEY = "premiumSlotState";
-export const bet = 10;
+export const DEFAULT_BET = 10;
+export const MIN_BET = 1;
 export const BONUS_INTERVAL = 24*60*60*1000; // 24h
 
 export function loadState() {
@@ -12,10 +13,21 @@ export function loadState() {
             if (!parsed.streak) parsed.streak = 0;
             parsed.spinHistory = parsed.spinHistory || [];
             parsed.winningHistory = parsed.winningHistory || [];
+            parsed.combinedHistory = parsed.combinedHistory || [];
+            parsed.currentBet = (typeof parsed.currentBet === 'number' && parsed.currentBet >= MIN_BET) ? parsed.currentBet : DEFAULT_BET;
             return parsed;
         }
     } catch {}
-    return { credits: 500, lastWin: 0, streak: 0, lastBonus: 0, spinHistory: [], winningHistory: [] };
+    return {
+        credits: 500,
+        lastWin: 0,
+        streak: 0,
+        lastBonus: 0,
+        spinHistory: [],
+        winningHistory: [],
+        combinedHistory: [],
+        currentBet: DEFAULT_BET
+    };
 }
 export function saveState(state) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
