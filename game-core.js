@@ -1,11 +1,18 @@
 // --- SYMBOLS & CANVAS SETUP ---
 export const SYMBOLS = [
-    { name: "Ruby", color: "#ff225a", payout: 50, draw: drawRuby },
-    { name: "Emerald", color: "#22df71", payout: 25, draw: drawEmerald },
-    { name: "Sapphire", color: "#229aff", payout: 10, draw: drawSapphire },
-    { name: "Amethyst", color: "#af4ee7", payout: 5, draw: drawAmethyst },
-    { name: "Coin", color: "#ffe45c", payout: 2, draw: drawCoin }
+    { name: "Ruby", color: "#ff225a", service: "Netflix", draw: drawRuby },
+    { name: "Emerald", color: "#22df71", service: "Spotify", draw: drawEmerald },
+    { name: "Sapphire", color: "#229aff", service: "YouTube Premium", draw: drawSapphire },
+    { name: "Amethyst", color: "#af4ee7", service: null, draw: drawAmethyst },
+    { name: "Coin", color: "#ffe45c", service: "Credits", draw: drawCoin }
 ];
+export const SERVICE_MAPPING = {
+    Ruby: "Netflix",
+    Emerald: "Spotify",
+    Sapphire: "YouTube Premium",
+    Coin: "Credits",
+    Amethyst: null
+};
 export const REEL_SYMBOL_DISTRIBUTION = [0,1,2,3,4,4,4,3,3,2,1,0,4,4,2,3,1,2,0,2];
 export const PAYLINES = [
     [[0,0],[1,0],[2,0],[3,0],[4,0]], [[0,1],[1,1],[2,1],[3,1],[4,1]], [[0,2],[1,2],[2,2],[3,2],[4,2]],

@@ -1,10 +1,10 @@
 import {
-    SYMBOLS, REELS, ROWS, PAYLINES, reels, winLines, winningSymbols, clearWinLines, clearWinningSymbols,
+    SYMBOLS, REELS, ROWS, reels, winLines, winningSymbols, clearWinLines, clearWinningSymbols,
     initReels, renderReels, spinReel, randSymbol,
     setAnimating, getAnimating, setCoinsToShower, getCoinsToShower
 } from './game-core.js';
 import {
-    loadState, saveState, bet, BONUS_INTERVAL, canClaimBonus, formatTimer
+    loadState, saveState, bet, BONUS_INTERVAL, canClaimBonus, formatTimer, getDiscountMessage
 } from './game-economy.js';
 
 // --- UI STATE ---
@@ -61,44 +61,111 @@ function onSpinEnd() {
     }, 250);
 }
 
+// --- FIXED: ONLY HORIZONTAL MATCHES ---
 function checkWins() {
     let totalWin = 0;
     clearWinLines(); clearWinningSymbols();
     setCoinsToShower(0);
-    let isJackpot = false;
-    for (let p = 0; p < PAYLINES.length; p++) {
-        const line = PAYLINES[p];
-        const firstIdx = reels[line[0][0]].symbols[line[0][1]];
-        let match = true;
-        for (let k = 1; k < 3; k++) {
-            const idx = reels[line[k][0]].symbols[line[k][1]];
-            if (idx !== firstIdx) { match = false; break; }
-        }
-        if (match) {
-            winLines.push(line.slice(0,3));
-            winningSymbols.push({symbol: firstIdx, positions: line.slice(0,3)});
-            totalWin += SYMBOLS[firstIdx].payout * bet;
-            if (SYMBOLS[firstIdx].payout >= 25) setCoinsToShower(getCoinsToShower() + 1);
-            if (SYMBOLS[firstIdx].name === "Ruby") isJackpot = true;
-        }
-    }
-    lastWin = totalWin; balance += totalWin; updatePanels(); save(); renderReels(ctx);
-    // Animate win effects, coin shower, reward
-    if (winLines.length) animateWins();
-    if (totalWin > 0 && getCoinsToShower()) triggerCoinShower(getCoinsToShower() * 9);
+    let bestDiscount = {service: null, percent: 0}; // Only show highest discount per spin
+    let coinWin = 0;
+    let winHighlights = [];
 
-    // --- Reward Message Display ---
-    let reward = "";
-    if (isJackpot && totalWin >= 150) {
-        reward = "JACKPOT! Claim FREE premium account!";
-    } else if (totalWin >= 501) {
-        reward = "50% OFF your next purchase!";
-    } else if (totalWin >= 201) {
-        reward = "20% discount unlocked!";
-    } else if (totalWin >= 50) {
-        reward = "You won 10% discount on premium accounts!";
+    // Check each row for horizontal streaks
+    for (let row = 0; row < ROWS; row++) {
+        let col = 0;
+        while (col < REELS) {
+            const symbolIdx = reels[col].symbols[row];
+            if (symbolIdx === undefined) { col++; continue; }
+            let count = 1;
+            for (let nextCol = col + 1; nextCol < REELS; nextCol++) {
+                if (reels[nextCol].symbols[row] === symbolIdx) count++;
+                else break;
+            }
+            if (count >= 3) {
+                handleMatch(symbolIdx, count, Array.from({length: count}, (_, i) => [col + i, row]), winHighlights);
+                col += count;
+            } else {
+                col++;
+            }
+        }
     }
-    if (reward) displayRewardMessage(reward);
+
+    function handleMatch(symbolIdx, count, positions, winHighlightsArr) {
+        const symbol = SYMBOLS[symbolIdx];
+        if (symbol.name === "Amethyst") return; // No reward
+
+        // Premium accounts
+        if (["Ruby", "Emerald", "Sapphire"].includes(symbol.name)) {
+            let percent = 0;
+            if (count === 3) percent = 30;
+            else if (count === 4) percent = 80;
+            else if (count >= 5) percent = 100;
+            if (percent > bestDiscount.percent) {
+                bestDiscount = {service: symbol.service, percent};
+            }
+            winLines.push(positions);
+            winHighlightsArr.push(...positions);
+        }
+        // Coin reward
+        if (symbol.name === "Coin") {
+            let credits = 0;
+            if (count === 3) credits = bet * 1;
+            else if (count === 4) credits = bet * 3;
+            else if (count >= 5) credits = bet * 10;
+            coinWin += credits;
+            setCoinsToShower(getCoinsToShower() + (count >= 5 ? 6 : count >= 4 ? 3 : 1));
+            winLines.push(positions);
+            winHighlightsArr.push(...positions);
+        }
+    }
+
+    // Apply wins and reward messages
+    let rewardMsg = "";
+    if (bestDiscount.percent > 0) {
+        rewardMsg = getDiscountMessage(bestDiscount.service, bestDiscount.percent);
+    }
+    if (coinWin > 0) {
+        totalWin += coinWin;
+        lastWin = coinWin;
+    } else {
+        lastWin = 0;
+    }
+    if (totalWin > 0) balance += totalWin;
+    updatePanels();
+    save();
+    renderReels(ctx);
+
+    // Animate highlights
+    if (winLines.length) animateWins(winHighlights);
+    if (coinWin > 0 && getCoinsToShower()) triggerCoinShower(getCoinsToShower() * 6);
+
+    if (rewardMsg) displayRewardMessage(rewardMsg);
+}
+
+function animateWins(highlights) {
+    let flash = 0;
+    function flashLoop() {
+        flash++;
+        if (flash > 10) return;
+        ctx.globalAlpha = flash % 2 ? 1 : 0.45;
+        renderReels(ctx);
+        // Highlight winning positions
+        if (highlights) {
+            highlights.forEach(pos => {
+                const [col, row] = pos;
+                ctx.save();
+                ctx.strokeStyle = "#ffd700cc";
+                ctx.shadowColor = "#ffec8a";
+                ctx.shadowBlur = 20;
+                ctx.lineWidth = 6;
+                ctx.strokeRect(col*90+18, row*90+30, 64, 64);
+                ctx.restore();
+            });
+        }
+        ctx.globalAlpha = 1;
+        setTimeout(flashLoop, 70);
+    }
+    flashLoop();
 }
 
 function updatePanels() {
@@ -139,19 +206,6 @@ function triggerCoinShower(n) {
             setTimeout(()=>{ coin.remove(); }, 1700);
         }, i*55 + Math.random()*60);
     }
-}
-
-function animateWins() {
-    let flash = 0;
-    function flashLoop() {
-        flash++;
-        if (flash > 10) return;
-        ctx.globalAlpha = flash % 2 ? 1 : 0.45;
-        renderReels(ctx);
-        ctx.globalAlpha = 1;
-        setTimeout(flashLoop, 70);
-    }
-    flashLoop();
 }
 
 // --- Daily Bonus ---

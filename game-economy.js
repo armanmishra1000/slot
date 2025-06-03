@@ -27,3 +27,10 @@ export function formatTimer(ms) {
     let s = Math.floor((ms%60000)/1000);
     return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 }
+
+// ---- New helper function ----
+export function getDiscountMessage(service, percent) {
+    if (!service) return "";
+    if (percent === 100) return `${service} FREE account unlocked!`;
+    return `${service} ${percent}% discount won!`;
+}
