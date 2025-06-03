@@ -1,8 +1,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Poppins', Arial, sans-serif;
-  background: radial-gradient(circle at 50% 30%, #23153a 0%, #0b0615 80%);
+  font-family: 'Lora', 'Poppins', Arial, sans-serif;
+  background: radial-gradient(circle at 50% 30%, #2a1c48 0%, #0d0519 80%);
   color: #f5e9d0;
 }
 
@@ -30,24 +30,28 @@ body {
 }
 
 .game-container {
-  background: radial-gradient(circle at top, #1b1530, #0e0919);
+  background: radial-gradient(circle at 50% 20%, #24173b, #0c0714 80%);
   border-radius: 20px;
   border: 2px solid #ffd862;
   padding: 30px 36px 40px;
-  box-shadow: 0 6px 24px #000a, 0 0 30px #ffd86222;
+  box-shadow: 0 8px 30px #000a, 0 0 40px #ffd86222;
+  transition: box-shadow 0.3s ease;
+}
+.game-container:hover {
+  box-shadow: 0 10px 36px #000a, 0 0 50px #ffd86244;
 }
 
 .slot-canvas-container {
   position: relative;
-  background: #14101f;
+  background: linear-gradient(160deg, #1b1428 0%, #10081a 80%);
   border: 2px solid #ffd862;
   border-radius: 16px;
-  box-shadow: 0 0 24px #000a inset;
+  box-shadow: 0 0 24px #000a inset, 0 0 20px #ffd86233;
   margin-bottom: 26px;
 }
 
 .slot-canvas-container.glow {
-  box-shadow: 0 0 40px #ffd862aa, 0 0 24px #ffd86244 inset, 0 0 24px #000a inset;
+  box-shadow: 0 0 50px #ffd862bb, 0 0 30px #ffd86255 inset, 0 0 24px #000a inset;
   transition: box-shadow 0.4s ease;
 }
 
@@ -103,25 +107,26 @@ body {
 }
 
 #spin-btn {
-  background: linear-gradient(150deg, #ffe27e, #ffbf2f);
+  background: linear-gradient(150deg, #ffef9e, #ffc742);
   color: #211c12;
   border: none;
-  border-radius: 10px;
-  padding: 8px 36px;
+  border-radius: 12px;
+  padding: 10px 44px;
   font-weight: 800;
-  font-size: 1.1rem;
-  box-shadow: 0 3px 10px #ffdf7044;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px #ffdf7044;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s;
 }
 
 #spin-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px #ffdf7077;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #ffdf70aa;
 }
 
 #spin-btn:active {
-  transform: none;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px #ffdf7044;
 }
 
 #balance, #last-win {
@@ -135,7 +140,7 @@ body {
 }
 
 .daily-bonus-panel {
-  background: #181225;
+  background: linear-gradient(160deg, #1c1327, #120a1a 80%);
   border: 1px solid #ffd862;
   border-radius: 12px;
   padding: 10px 18px;
@@ -147,7 +152,7 @@ body {
 }
 
 .daily-bonus-panel button {
-  background: linear-gradient(150deg, #ffe27e, #ffbf2f);
+  background: linear-gradient(150deg, #ffef9e, #ffc742);
   color: #211c12;
   border: none;
   border-radius: 8px;
@@ -161,7 +166,7 @@ body {
 }
 
 #paytable {
-  background: #181225;
+  background: linear-gradient(160deg, #1c1327, #120a1a 80%);
   border: 1px solid #ffd862;
   border-radius: 12px;
   padding: 12px 20px;
@@ -197,16 +202,16 @@ body {
   margin-right: 4px;
 }
 
-.ruby    { background: #ff225a; border: 2px solid #ffd862; }
-.emerald { background: #22df71; border: 2px solid #ffd862; }
-.sapphire{ background: #229aff; border: 2px solid #ffd862; border-radius: 50%; }
-.coin    { background: #ffe27e; border: 2px solid #ffd862; border-radius: 50%; }
-.amethyst{ background: #af4ee7; border: 2px solid #ffd862; transform: rotate(45deg); }
+.ruby    { background: linear-gradient(#ff4881, #b0002f); border: 2px solid #ffd862; }
+.emerald { background: linear-gradient(#2afc89, #159653); border: 2px solid #ffd862; }
+.sapphire{ background: linear-gradient(#37abff, #1c3abf); border: 2px solid #ffd862; border-radius: 50%; }
+.coin    { background: linear-gradient(#ffe27e, #caa22e); border: 2px solid #ffd862; border-radius: 50%; }
+.amethyst{ background: linear-gradient(#c864ff, #6711a6); border: 2px solid #ffd862; transform: rotate(45deg); }
 .amethyst-text { color: #af4ee7; font-weight: 700; }
 
 #history-panel {
   width: 300px;
-  background: #14101f;
+  background: linear-gradient(160deg, #1a1222, #0d0714 80%);
   border-radius: 18px;
   padding: 24px 16px 28px 24px;
   box-shadow: 0 6px 24px #000a;
@@ -233,7 +238,7 @@ body {
 }
 
 #spin-history-list li {
-  background: #1d1730;
+  background: linear-gradient(145deg, #1e1731, #151026);
   border-left: 6px solid #ffd862;
   padding: 10px 12px;
   border-radius: 8px;
