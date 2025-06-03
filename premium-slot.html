@@ -6,14 +6,22 @@
   <title>Premium Gem Slot Machine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="main-flex-wrapper">
-    <div class="game-container">
-      <main>
-        <h1>💎 Premium Gem Slot Machine 💎</h1>
+  <header class="app-header">
+    <h1>Premium Gem Slot Machine</h1>
+  </header>
+  <div class="layout">
+    <aside id="history-panel">
+      <section id="spin-history-section">
+        <h2>Spin & Win History</h2>
+        <ul id="spin-history-list"></ul>
+      </section>
+    </aside>
+    <div class="game-area">
+      <div class="game-container">
         <div class="slot-canvas-container">
           <canvas id="slot-canvas" width="500" height="300"></canvas>
           <div id="reward-message"></div>
@@ -45,14 +53,8 @@
           </ul>
         </section>
         <div id="coin-shower"></div>
-      </main>
+      </div>
     </div>
-    <aside id="history-panel">
-      <section id="spin-history-section">
-        <h2>Spin & Win History</h2>
-        <ul id="spin-history-list"></ul>
-      </section>
-    </aside>
   </div>
   <script type="module" src="main.js"></script>
 </body>
