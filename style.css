@@ -2,7 +2,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Lora', 'Poppins', Arial, sans-serif;
-  background: radial-gradient(circle at 50% 30%, #2a1c48 0%, #0d0519 80%);
+  background: radial-gradient(circle at 50% 30%, #4b1d6e 0%, #1b0d33 80%);
   color: #f5e9d0;
 }
 
@@ -12,7 +12,7 @@ body {
   font-family: 'Cinzel', serif;
   font-size: 2.4rem;
   color: #ffd862;
-  text-shadow: 0 0 12px #ffd86255;
+  text-shadow: 0 0 16px #ffec8a55;
 }
 
 .layout {
@@ -30,7 +30,7 @@ body {
 }
 
 .game-container {
-  background: radial-gradient(circle at 50% 20%, #24173b, #0c0714 80%);
+  background: radial-gradient(circle at 50% 20%, #5a218c, #220c47 80%);
   border-radius: 20px;
   border: 2px solid #ffd862;
   padding: 30px 36px 40px;
@@ -43,7 +43,7 @@ body {
 
 .slot-canvas-container {
   position: relative;
-  background: linear-gradient(160deg, #1b1428 0%, #10081a 80%);
+  background: linear-gradient(160deg, #32144f 0%, #120926 80%);
   border: 2px solid #ffd862;
   border-radius: 16px;
   box-shadow: 0 0 24px #000a inset, 0 0 20px #ffd86233;
@@ -107,7 +107,7 @@ body {
 }
 
 #spin-btn {
-  background: linear-gradient(150deg, #ffef9e, #ffc742);
+  background: linear-gradient(160deg, #ffe884, #ffae00);
   color: #211c12;
   border: none;
   border-radius: 12px;
@@ -121,16 +121,16 @@ body {
 
 #spin-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px #ffdf70aa;
+  box-shadow: 0 8px 20px #ffc94daa;
 }
 
 #spin-btn:active {
   transform: translateY(0);
-  box-shadow: 0 4px 12px #ffdf7044;
+  box-shadow: 0 4px 12px #ffc94d66;
 }
 
 #balance, #last-win {
-  color: #ffd862;
+  color: #ffe69a;
   font-weight: 700;
   font-size: 1rem;
 }
@@ -140,7 +140,7 @@ body {
 }
 
 .daily-bonus-panel {
-  background: linear-gradient(160deg, #1c1327, #120a1a 80%);
+  background: linear-gradient(160deg, #371656, #180b2a 80%);
   border: 1px solid #ffd862;
   border-radius: 12px;
   padding: 10px 18px;
@@ -166,7 +166,7 @@ body {
 }
 
 #paytable {
-  background: linear-gradient(160deg, #1c1327, #120a1a 80%);
+  background: linear-gradient(160deg, #31134d, #170a2c 80%);
   border: 1px solid #ffd862;
   border-radius: 12px;
   padding: 12px 20px;
@@ -211,7 +211,7 @@ body {
 
 #history-panel {
   width: 300px;
-  background: linear-gradient(160deg, #1a1222, #0d0714 80%);
+  background: linear-gradient(160deg, #2d1345, #120725 80%);
   border-radius: 18px;
   padding: 24px 16px 28px 24px;
   box-shadow: 0 6px 24px #000a;
