@@ -1,7 +1,8 @@
 import {
     SYMBOLS, REELS, ROWS, reels, winLines, winningSymbols, clearWinLines, clearWinningSymbols,
     initReels, renderReels, spinReel, randSymbol,
-    setAnimating, getAnimating, setCoinsToShower, getCoinsToShower
+    setAnimating, getAnimating, setCoinsToShower, getCoinsToShower,
+    P, DIVIDER_W, REEL_W, SYMBOL_H, CANVAS_W, CANVAS_H
 } from './game-core.js';
 import {
     loadState, saveState, DEFAULT_BET, MIN_BET, BONUS_INTERVAL, canClaimBonus, formatTimer, getDiscountMessage
@@ -18,8 +19,8 @@ export function setupSlotUI() {
     const canvasContainer = document.querySelector(".slot-canvas-container");
     const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
-    const width = 600;
-    const height = 360;
+    const width = CANVAS_W;
+    const height = CANVAS_H;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = width + "px";
@@ -216,7 +217,9 @@ export function setupSlotUI() {
                     ctx.shadowColor = "#ffec8a";
                     ctx.shadowBlur = 20;
                     ctx.lineWidth = 6;
-                    ctx.strokeRect(col*90+18, row*90+30, 64, 64);
+                    const rect_x = P + col * (REEL_W + DIVIDER_W);
+                    const rect_y = P + row * SYMBOL_H;
+                    ctx.strokeRect(rect_x, rect_y, REEL_W, SYMBOL_H);
                     ctx.restore();
                 });
             }
