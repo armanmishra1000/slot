@@ -1,6 +1,7 @@
 # Premium Vegas Slot Machine
 
 This project is a browser-based slot machine game written in vanilla JavaScript. The latest version adds a lightweight [PixiJS](https://pixijs.com/) background layer for smooth graphics and a redesigned interface with a pop-up paytable. A new sidebar showcases top players beside the game for a casino-style layout.
+It now also features a spin result display box above the reels that highlights whether you won credits, discounts or nothing after each spin.
 
 ## Running Locally on macOS
 

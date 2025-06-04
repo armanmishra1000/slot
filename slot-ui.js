@@ -29,6 +29,7 @@ export function setupSlotUI() {
     const balanceEl = document.getElementById("balance");
     const lastWinEl = document.getElementById("last-win");
     const rewardMsgEl = document.getElementById("reward-message");
+    const spinResultBoxEl = document.getElementById("spin-result-box");
     const bonusTimerEl = document.getElementById("bonus-timer");
     const streakCounterEl = document.getElementById("streak-counter");
     const claimBonusBtn = document.getElementById("claim-bonus-btn");
@@ -80,6 +81,7 @@ export function setupSlotUI() {
 
     function spin() {
         if (getAnimating() || balance < currentBet) return;
+        updateSpinResultDisplay({ status: 'spinning' });
         setAnimating(true);
         clearWinLines(); clearWinningSymbols(); setCoinsToShower(0);
         lastWin = 0; updatePanels();
@@ -112,9 +114,10 @@ export function setupSlotUI() {
             }
             setAnimating(false);
             const winResult = checkWins();
+            updateSpinResultDisplay(winResult);
             addCombinedHistoryEntry({
                 symbols: finalReelSymbols,
-                winText: winResult.winText,
+                winText: winResult.rawWinTextForHistory,
                 creditsWon: winResult.creditsWon,
                 timestamp: new Date().toLocaleTimeString(),
                 bet: currentBet
@@ -194,11 +197,10 @@ export function setupSlotUI() {
         if (rewardMsg) winEntryText = rewardMsg;
         if (coinWin > 0) winEntryText += (winEntryText ? " & " : "") + `Won ${coinWin} credits`;
 
-        if (rewardMsg) displayRewardMessage(rewardMsg);
-
         return {
-            winText: winEntryText || "No win",
-            creditsWon: totalWin
+            creditsWon: totalWin,
+            discountInfo: bestDiscount.service ? bestDiscount : null,
+            rawWinTextForHistory: winEntryText || "No win"
         };
     }
 
@@ -277,6 +279,33 @@ export function setupSlotUI() {
                 setTimeout(()=>{ coin.remove(); }, 1700);
             }, i*55 + Math.random()*60);
         }
+    }
+
+    function updateSpinResultDisplay(resultData) {
+        spinResultBoxEl.className = 'spin-result-box';
+        let message = '';
+        let className = '';
+        if (resultData.status === 'spinning') {
+            message = 'SPINNING...';
+            className = 'spinning';
+        } else if (resultData.creditsWon === 0 && !resultData.discountInfo) {
+            message = 'TRY AGAIN';
+            className = 'lose';
+        } else {
+            if (resultData.creditsWon > 0 && resultData.discountInfo) {
+                message = `MEGA WIN! ${resultData.creditsWon} CREDITS & ${resultData.discountInfo.service} ${resultData.discountInfo.percent}%`;
+                className = 'win-jackpot';
+            } else if (resultData.creditsWon > 0) {
+                message = `YOU WIN! ${resultData.creditsWon} CREDITS`;
+                className = 'win-credits';
+            } else if (resultData.discountInfo) {
+                message = `${resultData.discountInfo.service} ${resultData.discountInfo.percent}% DISCOUNT!`;
+                className = 'win-discount';
+            }
+        }
+        spinResultBoxEl.innerHTML = `<span>${message}</span>`;
+        if (className) spinResultBoxEl.classList.add(className);
+        void spinResultBoxEl.offsetWidth;
     }
 
     function setupBonusPanel() {

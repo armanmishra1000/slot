@@ -52,6 +52,67 @@ body {
   box-shadow: 0 10px 36px #000a, 0 0 50px #ffd86244;
 }
 
+/* Spin result display box above the canvas */
+#spin-result-box {
+  width: 100%;
+  height: 70px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: linear-gradient(160deg, #401460, #18072a);
+  border: 3px solid #ffd862;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Cinzel', 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: #f5e9d0;
+  text-shadow: 0 0 8px #00000088;
+  box-shadow: 0 0 18px #000a inset;
+  transition: all 0.3s ease-out;
+}
+
+#spin-result-box span {
+  display: inline-block;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#spin-result-box.spinning {
+  color: #ffe69a;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 18px #000a inset; }
+  50% { box-shadow: 0 0 28px #ffd86255 inset; }
+}
+
+#spin-result-box.win-credits {
+  color: #ffd862;
+  box-shadow: 0 0 22px #ffd86266;
+}
+
+#spin-result-box.win-discount {
+  color: #7bf79f;
+  box-shadow: 0 0 22px #7bf79f66;
+}
+
+#spin-result-box.win-jackpot {
+  color: #ffec8a;
+  box-shadow: 0 0 25px #ffec8a88;
+}
+
+#spin-result-box.lose {
+  color: #c0b090;
+  box-shadow: 0 0 18px #000a inset;
+}
+
 .slot-canvas-container {
   position: relative;
   background: linear-gradient(160deg, #32144f 0%, #120926 80%);
