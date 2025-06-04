@@ -20,7 +20,12 @@ export const PAYLINES = [
     [[0,0],[1,0],[2,1],[3,2],[4,2]], [[0,2],[1,2],[2,1],[3,0],[4,0]],
     [[0,1],[1,2],[2,2],[3,2],[4,1]], [[0,1],[1,0],[2,0],[3,0],[4,1]], [[0,2],[1,1],[2,1],[3,1],[4,0]],
 ];
-export const REELS = 5, ROWS = 3, REEL_W = 90, SYMBOL_H = 90, SPIN_Y_OFFSET = 30;
+export const REELS = 5, ROWS = 3;
+export const CANVAS_W = 600, CANVAS_H = 360;
+export const P = 15, DIVIDER_W = 2;
+export const REEL_W = (CANVAS_W - 2 * P - (REELS - 1) * DIVIDER_W) / REELS;
+export const SYMBOL_H = (CANVAS_H - 2 * P) / ROWS;
+export const SPIN_Y_OFFSET = P;
 
 export let reels = [];
 export let winLines = [];
@@ -30,11 +35,8 @@ export function clearWinningSymbols() { winningSymbols.length = 0; }
 
 // --- STATE THAT NEEDS GETTER/SETTER ---
 let animating = false;
-let coinsToShower = 0;
 export function setAnimating(val) { animating = val; }
 export function getAnimating() { return animating; }
-export function setCoinsToShower(val) { coinsToShower = val; }
-export function getCoinsToShower() { return coinsToShower; }
 
 // --- SYMBOL DRAWING ---
 export function drawRuby(ctx) {
@@ -140,12 +142,29 @@ export function renderReels(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     for (let i = 0; i < REELS; i++) {
         const reel = reels[i];
-        for (let j = 0; j < ROWS+1; j++) {
-            const y = j*SYMBOL_H - reel.animY + SPIN_Y_OFFSET;
-            const symbolIdx = reel.symbols[j%ROWS];
+        for (let j = 0; j < ROWS + 1; j++) {
+            const cell_base_x = P + i * (REEL_W + DIVIDER_W);
+            const cell_base_y = P + (j * SYMBOL_H) - reel.animY;
+            const symbolIdx = reel.symbols[j % ROWS];
             const symbolObj = SYMBOLS[symbolIdx];
-            ctx.save(); ctx.translate(i*REEL_W + 18, y);
-            symbolObj.draw(ctx); ctx.restore();
+            ctx.save();
+            ctx.translate(cell_base_x, cell_base_y);
+            const s = Math.min(REEL_W / 64, SYMBOL_H / 64) * 0.9;
+            ctx.translate((REEL_W - (64 * s)) / 2, (SYMBOL_H - (64 * s)) / 2);
+            ctx.scale(s, s);
+            symbolObj.draw(ctx);
+            ctx.restore();
+        }
+        if (i < REELS - 1) {
+            const divider_x = P + (i * (REEL_W + DIVIDER_W)) + REEL_W + (DIVIDER_W / 2);
+            ctx.save();
+            ctx.strokeStyle = '#8A652D';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(divider_x, P);
+            ctx.lineTo(divider_x, CANVAS_H - P);
+            ctx.stroke();
+            ctx.restore();
         }
     }
 }

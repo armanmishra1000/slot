@@ -2,16 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Premium Gem Slot Machine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Vegas Slot Machine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;700&family=Montserrat:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/browser/pixi.min.js"></script>
 </head>
 <body>
-  <div class="main-flex-wrapper">
-    <div class="game-container">
-      <main>
-        <h1>💎 Premium Gem Slot Machine 💎</h1>
+  <div id="app-container" class="app-container">
+    <aside id="app-sidebar" class="app-sidebar">
+      <div class="sidebar-section">
+        <button id="open-history-modal-btn" class="sidebar-btn">Spin History</button>
+      </div>
+      <div class="sidebar-section">
+        <button id="open-top-players-modal-btn" class="sidebar-btn">Top Players</button>
+      </div>
+    </aside>
+    <main id="main-game-content" class="main-game-content">
+      <header class="app-header">
+        <h1>Premium Vegas Slot Machine</h1>
+      </header>
+      <div class="game-area">
+      <div class="game-container">
+        <div id="spin-result-box" class="spin-result-box">
+        </div>
         <div class="slot-canvas-container">
-          <canvas id="slot-canvas" width="500" height="300"></canvas>
+          <canvas id="slot-canvas" width="600" height="360"></canvas>
           <div id="reward-message"></div>
         </div>
         <div class="control-panel">
@@ -25,31 +43,57 @@
             <span id="last-win">Last Win: <span id="last-win-amount">0</span> credits</span>
           </div>
         </div>
-        <div class="daily-bonus-panel">
-          <span>Next daily credit in: <span id="bonus-timer"></span></span>
-          <span>Login streak: <span id="streak-counter"></span></span>
-          <button id="claim-bonus-btn" style="display:none;">Claim 100 Credits</button>
+        <div class="info-panels">
+          <div class="daily-bonus-panel">
+            <span>Next daily credit in: <span id="bonus-timer"></span></span>
+            <span>Login streak: <span id="streak-counter"></span></span>
+            <button id="claim-bonus-btn" style="display:none;">Claim 100 Credits</button>
+          </div>
+          <button id="paytable-btn" class="icon-btn" aria-label="Paytable">
+            <img src="info-icon.svg" alt="Paytable" />
+          </button>
         </div>
-        <section id="paytable">
-          <h2>Paytable</h2>
-          <ul>
-            <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-            <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-            <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-            <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
-            <li><span class="symbol amethyst"></span> Amethyst – <span class="amethyst-text">No reward</span></li>
-          </ul>
-        </section>
-        <div id="coin-shower"></div>
-      </main>
-    </div>
-    <aside id="history-panel">
-      <section id="spin-history-section">
-        <h2>Spin & Win History</h2>
-        <ul id="spin-history-list"></ul>
-      </section>
-    </aside>
+        </div>
+      </div>
+    </main>
   </div>
+
+  <div id="paytable-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-paytable" class="close-btn">&times;</button>
+      <h2>Paytable</h2>
+      <ul>
+        <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
+        <li><span class="symbol amethyst"></span> Amethyst – <span class="amethyst-text">No reward</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="spin-history-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-history-modal" class="close-btn">&times;</button>
+      <h2>Spin &amp; Win History</h2>
+      <ul id="spin-history-list"></ul>
+    </div>
+  </div>
+
+  <div id="top-players-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-top-players-modal" class="close-btn">&times;</button>
+      <h2>Top Players</h2>
+      <ol class="top-players">
+        <li><span class="player-name">Alice</span><span class="player-score">8500</span></li>
+        <li><span class="player-name">Bob</span><span class="player-score">7800</span></li>
+        <li><span class="player-name">Carol</span><span class="player-score">7200</span></li>
+        <li><span class="player-name">Dan</span><span class="player-score">6900</span></li>
+        <li><span class="player-name">Eve</span><span class="player-score">6400</span></li>
+      </ol>
+    </div>
+  </div>
+
   <script type="module" src="main.js"></script>
 </body>
 </html>
