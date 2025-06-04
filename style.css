@@ -1,8 +1,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Lora', 'Poppins', Arial, sans-serif;
-  background: radial-gradient(circle at 50% 30%, #4b1d6e 0%, #1b0d33 80%);
+  font-family: 'Montserrat', 'Poppins', 'Lora', Arial, sans-serif;
+  background: radial-gradient(circle at 50% 20%, #51226d 0%, #14071e 85%);
   color: #f5e9d0;
 }
 
@@ -35,9 +35,10 @@ body {
   border: 2px solid #ffd862;
   padding: 30px 36px 40px;
   box-shadow: 0 8px 30px #000a, 0 0 40px #ffd86222;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .game-container:hover {
+  transform: translateY(-4px);
   box-shadow: 0 10px 36px #000a, 0 0 50px #ffd86244;
 }
 
@@ -48,6 +49,11 @@ body {
   border-radius: 16px;
   box-shadow: 0 0 24px #000a inset, 0 0 20px #ffd86233;
   margin-bottom: 26px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.slot-canvas-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px #000a inset, 0 0 24px #ffd86244;
 }
 
 .slot-canvas-container.glow {
@@ -116,7 +122,23 @@ body {
   font-size: 1.2rem;
   box-shadow: 0 4px 12px #ffdf7044;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s;
+}
+#spin-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+}
+#spin-btn:hover::after {
+  left: 130%;
 }
 
 #spin-btn:hover {
@@ -149,6 +171,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.daily-bonus-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px #000a;
 }
 
 .daily-bonus-panel button {
@@ -218,6 +245,11 @@ body {
   border: 2px solid #ffd862;
   max-height: 85vh;
   overflow-y: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+#history-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px #000a;
 }
 
 #history-panel h2 {
