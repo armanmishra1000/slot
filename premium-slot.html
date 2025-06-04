@@ -11,21 +11,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/browser/pixi.min.js"></script>
 </head>
 <body>
-  <header class="app-header">
-    <h1>Premium Vegas Slot Machine</h1>
-  </header>
-  <div class="page">
-    <aside class="sidebar">
-      <h2>Top Players</h2>
-      <ol class="top-players">
-        <li><span class="player-name">Alice</span><span class="player-score">8500</span></li>
-        <li><span class="player-name">Bob</span><span class="player-score">7800</span></li>
-        <li><span class="player-name">Carol</span><span class="player-score">7200</span></li>
-        <li><span class="player-name">Dan</span><span class="player-score">6900</span></li>
-        <li><span class="player-name">Eve</span><span class="player-score">6400</span></li>
-      </ol>
+  <div id="app-container" class="app-container">
+    <aside id="app-sidebar" class="app-sidebar">
+      <div class="sidebar-section" id="top-players-section">
+        <h2>Top Players</h2>
+        <ol class="top-players">
+          <li><span class="player-name">Alice</span><span class="player-score">8500</span></li>
+          <li><span class="player-name">Bob</span><span class="player-score">7800</span></li>
+          <li><span class="player-name">Carol</span><span class="player-score">7200</span></li>
+          <li><span class="player-name">Dan</span><span class="player-score">6900</span></li>
+          <li><span class="player-name">Eve</span><span class="player-score">6400</span></li>
+        </ol>
+      </div>
+      <div class="sidebar-section" id="spin-history-container">
+        <section id="spin-history-section">
+          <h2>Spin & Win History</h2>
+          <ul id="spin-history-list"></ul>
+        </section>
+      </div>
     </aside>
-    <div class="layout">
+    <main id="main-game-content" class="main-game-content">
+      <header class="app-header">
+        <h1>Premium Vegas Slot Machine</h1>
+      </header>
       <div class="game-area">
       <div class="game-container">
         <div id="spin-result-box" class="spin-result-box">
@@ -55,15 +63,9 @@
             <img src="info-icon.svg" alt="Paytable" />
           </button>
         </div>
+        </div>
       </div>
-      <aside id="history-panel">
-        <section id="spin-history-section">
-          <h2>Spin & Win History</h2>
-          <ul id="spin-history-list"></ul>
-        </section>
-      </aside>
-    </div>
-  </div>
+    </main>
   </div>
 
   <div id="paytable-modal" class="modal">
