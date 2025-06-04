@@ -18,8 +18,8 @@ export function setupSlotUI() {
     const canvasContainer = document.querySelector(".slot-canvas-container");
     const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
-    const width = 500;
-    const height = 300;
+    const width = 600;
+    const height = 360;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = width + "px";
@@ -32,6 +32,9 @@ export function setupSlotUI() {
     const streakCounterEl = document.getElementById("streak-counter");
     const claimBonusBtn = document.getElementById("claim-bonus-btn");
     const betAmountInputEl = document.getElementById("bet-amount-input");
+    const paytableBtn = document.getElementById("paytable-btn");
+    const paytableModal = document.getElementById("paytable-modal");
+    const closePaytable = document.getElementById("close-paytable");
 
     state = loadState();
     balance = state.credits;
@@ -61,6 +64,16 @@ export function setupSlotUI() {
     setupBonusPanel();
     displayRewardMessage();
     updateSpinHistoryUI();
+
+    paytableBtn.addEventListener("click", () => {
+        paytableModal.style.display = "flex";
+    });
+    closePaytable.addEventListener("click", () => {
+        paytableModal.style.display = "none";
+    });
+    paytableModal.addEventListener("click", (e) => {
+        if (e.target === paytableModal) paytableModal.style.display = "none";
+    });
 
     document.getElementById("spin-btn").addEventListener("click", spin);
 

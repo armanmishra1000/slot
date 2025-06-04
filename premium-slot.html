@@ -15,16 +15,10 @@
     <h1>Premium Vegas Slot Machine</h1>
   </header>
   <div class="layout">
-    <aside id="history-panel">
-      <section id="spin-history-section">
-        <h2>Spin & Win History</h2>
-        <ul id="spin-history-list"></ul>
-      </section>
-    </aside>
     <div class="game-area">
       <div class="game-container">
         <div class="slot-canvas-container">
-          <canvas id="slot-canvas" width="500" height="300"></canvas>
+          <canvas id="slot-canvas" width="600" height="360"></canvas>
           <div id="reward-message"></div>
         </div>
         <div class="control-panel">
@@ -44,21 +38,35 @@
             <span>Login streak: <span id="streak-counter"></span></span>
             <button id="claim-bonus-btn" style="display:none;">Claim 100 Credits</button>
           </div>
-          <details id="paytable">
-            <summary>Paytable</summary>
-            <ul>
-              <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-              <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-              <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
-              <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
-              <li><span class="symbol amethyst"></span> Amethyst – <span class="amethyst-text">No reward</span></li>
-            </ul>
-          </details>
+          <button id="paytable-btn" class="icon-btn" aria-label="Paytable">
+            <img src="info-icon.svg" alt="Paytable" />
+          </button>
         </div>
         <div id="coin-shower"></div>
       </div>
+      <aside id="history-panel">
+        <section id="spin-history-section">
+          <h2>Spin & Win History</h2>
+          <ul id="spin-history-list"></ul>
+        </section>
+      </aside>
     </div>
   </div>
+
+  <div id="paytable-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-paytable" class="close-btn">&times;</button>
+      <h2>Paytable</h2>
+      <ul>
+        <li><span class="symbol ruby"></span> Netflix – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol emerald"></span> Spotify – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol sapphire"></span> YouTube Premium – 3: <b>30%</b>, 4: <b>80%</b>, 5: <b>100%</b> discount</li>
+        <li><span class="symbol coin"></span> Coin – 3: <b>1×</b>, 4: <b>3×</b>, 5: <b>10×</b> bet credits</li>
+        <li><span class="symbol amethyst"></span> Amethyst – <span class="amethyst-text">No reward</span></li>
+      </ul>
+    </div>
+  </div>
+
   <script type="module" src="main.js"></script>
 </body>
 </html>
