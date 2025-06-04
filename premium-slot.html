@@ -14,8 +14,19 @@
   <header class="app-header">
     <h1>Premium Vegas Slot Machine</h1>
   </header>
-  <div class="layout">
-    <div class="game-area">
+  <div class="page">
+    <aside class="sidebar">
+      <h2>Top Players</h2>
+      <ol class="top-players">
+        <li><span class="player-name">Alice</span><span class="player-score">8500</span></li>
+        <li><span class="player-name">Bob</span><span class="player-score">7800</span></li>
+        <li><span class="player-name">Carol</span><span class="player-score">7200</span></li>
+        <li><span class="player-name">Dan</span><span class="player-score">6900</span></li>
+        <li><span class="player-name">Eve</span><span class="player-score">6400</span></li>
+      </ol>
+    </aside>
+    <div class="layout">
+      <div class="game-area">
       <div class="game-container">
         <div class="slot-canvas-container">
           <canvas id="slot-canvas" width="600" height="360"></canvas>
@@ -51,6 +62,7 @@
         </section>
       </aside>
     </div>
+  </div>
   </div>
 
   <div id="paytable-modal" class="modal">

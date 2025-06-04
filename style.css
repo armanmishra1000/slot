@@ -15,14 +15,20 @@ body {
   text-shadow: 0 0 16px #ffec8a55;
 }
 
-.layout {
+.page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start;
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
+}
+
+.layout {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  align-items: flex-start;
 }
 
 .game-area {
@@ -36,7 +42,7 @@ body {
 .game-container {
   background: radial-gradient(circle at 50% 20%, #5a218c, #220c47 80%);
   border-radius: 20px;
-  border: 2px solid #ffd862;
+  border: 3px solid #ffd862;
   padding: 30px 36px 40px;
   box-shadow: 0 8px 30px #000a, 0 0 40px #ffd86222;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -49,7 +55,7 @@ body {
 .slot-canvas-container {
   position: relative;
   background: linear-gradient(160deg, #32144f 0%, #120926 80%);
-  border: 2px solid #ffd862;
+  border: 3px solid #ffd862;
   border-radius: 16px;
   box-shadow: 0 0 24px #000a inset, 0 0 20px #ffd86233;
   margin-bottom: 26px;
@@ -266,9 +272,8 @@ body {
 .amethyst-text { color: #af4ee7; font-weight: 700; }
 
 #history-panel {
-  width: 100%;
-  max-width: 680px;
-  margin-top: 20px;
+  width: 260px;
+  margin-top: 0;
   background: linear-gradient(160deg, #2d1345, #120725 80%);
   border-radius: 18px;
   padding: 24px 16px 28px 24px;
@@ -352,6 +357,47 @@ body {
 }
 .icon-btn:hover {
   transform: scale(1.1);
+}
+
+.sidebar {
+  width: 220px;
+  background: linear-gradient(160deg, #2b1846, #120725 80%);
+  border: 2px solid #ffd862;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 6px 24px #000a;
+  color: #f5e9d0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sidebar h2 {
+  font-family: 'Cinzel', serif;
+  color: #ffd862;
+  text-align: center;
+  margin-top: 0;
+}
+
+.top-players {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top-players li {
+  background: linear-gradient(145deg, #1e1731, #151026);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-score {
+  color: #ffd862;
+  font-weight: 700;
 }
 
 .modal {

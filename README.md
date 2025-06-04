@@ -1,6 +1,6 @@
 # Premium Vegas Slot Machine
 
-This project is a browser-based slot machine game written in vanilla JavaScript. The latest version adds a lightweight [PixiJS](https://pixijs.com/) background layer for smooth graphics and a redesigned interface with a pop-up paytable.
+This project is a browser-based slot machine game written in vanilla JavaScript. The latest version adds a lightweight [PixiJS](https://pixijs.com/) background layer for smooth graphics and a redesigned interface with a pop-up paytable. A new sidebar showcases top players beside the game for a casino-style layout.
 
 ## Running Locally on macOS
 
@@ -18,6 +18,6 @@ This project is a browser-based slot machine game written in vanilla JavaScript.
    This serves the files at `http://localhost:8080/`. Leave the terminal running while you play.
 
 4. **Open the game** by visiting `http://localhost:8080/premium-slot.html` in your browser.
-   Use the small information button below the reels to view the paytable popup.
+   Use the small information button below the reels to view the paytable popup. The sidebar on the left lists sample top players for reference.
 
 PixiJS is loaded from a CDN, so you just need an internet connection for the first load. All gameplay state is stored in your browser's localStorage.
